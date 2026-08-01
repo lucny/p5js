@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <!-- Základní metadata umožní správné zobrazení stránky i na mobilních zařízeních. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Padajici objekty</title>
+    <style>
+      /* Odstraníme výchozí okraje prohlížeče a nastavíme barvu kolem canvasu. */
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #111c26;
+      }
+
+      /* Canvas bude uprostřed okna a na menších obrazovkách se zmenší podle šířky. */
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+      }
+
+      /* display:block odstraní drobnou mezeru, kterou prohlížeč běžně přidává pod obrázky. */
+      canvas {
+        display: block;
+        max-width: 100vw;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Knihovna p5.js musí být načtena jako první, protože poskytuje funkce
+      createCanvas(), image(), random(), translate() a další funkce použité
+      v souborech projektu.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+
+    <!--
+      Pořadí tříd odpovídá dědičnosti. Nejprve se načte rodičovská třída,
+      potom její potomci a nakonec hlavní program, který všechny třídy vytváří.
+    -->
+    <script src="FallingObject.js"></script>
+    <script src="Snowflake.js"></script>
+    <script src="Raindrop.js"></script>
+    <script src="Soot.js"></script>
+    <script src="sketch.js"></script>
+  </body>
+</html>
