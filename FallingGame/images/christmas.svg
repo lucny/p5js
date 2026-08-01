@@ -1,0 +1,22 @@
+<!-- Jednoduché zimní pozadí; při sestavení projektu se převádí na christmas.jpg. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#142a46"/>
+  <circle cx="650" cy="105" r="48" fill="#eaf4ff" opacity=".9"/>
+  <g fill="#d7e9f4" opacity=".85">
+    <circle cx="90" cy="78" r="3"/>
+    <circle cx="180" cy="145" r="4"/>
+    <circle cx="292" cy="80" r="3"/>
+    <circle cx="420" cy="135" r="4"/>
+    <circle cx="545" cy="62" r="3"/>
+    <circle cx="744" cy="175" r="4"/>
+    <circle cx="690" cy="240" r="3"/>
+  </g>
+  <path fill="#426681" d="M0 350 150 180l145 170 135-160 180 160 100-130 90 130v250H0Z"/>
+  <path fill="#ecf6fb" d="m0 350 150-170 145 170-40-25-105-70-85 94Zm290 0 135-160 180 160-52-28-127-84-96 87Zm320 0 100-130 90 130-34-25-56-70-60 71Z"/>
+  <path fill="#18344c" d="M0 470c135-74 235-55 360 5 142 67 280 28 440-32v157H0Z"/>
+  <g fill="#25516d">
+    <path d="m100 430 22-125 22 125Zm-35-85 57-72 57 72h-38l-19-25-20 25Zm-18 45 76-95 76 95h-45l-31-40-31 40Z"/>
+    <path d="m700 442 19-105 19 105Zm-30-76 49-64 49 64h-34l-15-21-16 21Zm-15 42 64-82 64 82h-38l-26-34-27 34Z"/>
+  </g>
+  <path fill="#f5fbff" d="M0 528c142-49 255-13 367 21 132 40 270 19 433-45v96H0Z"/>
+</svg>

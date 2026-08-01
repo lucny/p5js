@@ -19,6 +19,9 @@ Ukázka procvičuje především:
 - práci s polem objektů,
 - automatické vytváření a odstraňování objektů,
 - detekci kolizí a změnu skóre,
+- herní stavy pro úvod, hru, nápovědu a konec hry,
+- časový limit, HUD a ukládání nejvyššího skóre,
+- zvukové efekty se společným přepínačem,
 - načítání a vykreslování obrázků v p5.js.
 
 ## Struktura projektu
@@ -28,7 +31,8 @@ Ukázka procvičuje především:
 - `FallingObject.js` - společná rodičovská třída.
 - `Snowflake.js`, `Raindrop.js`, `Soot.js` - specializované potomkovské třídy.
 - `Player.js` - hráč s ovládáním, kolizemi a skóre.
-- `images/` - SVG obrázky používané ve scéně.
+- `images/` - obrázky hráče, objektů a zimního pozadí.
+- `sounds/` - krátké zvukové efekty pro start, sběr, zásah a konec hry.
 - `navody/` - výukové lekce navazující na projekt.
 
 ## Spuštění

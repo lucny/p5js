@@ -64,14 +64,14 @@ class Player {
    *
    * Knihovna p5.collide2d očekává pro obdélník levý horní roh, šířku a výšku.
    * Padající objekt předáváme jako kruh se středem x/y a průměrem size.
-   * Metoda vrací true pouze při kolizi, aby hlavní smyčka věděla, zda má
-   * objekt odstranit z pole.
+   * Metoda vrací název typu kolize, aby hlavní program mohl kromě odstranění
+   * objektu přehrát také odpovídající zvukový efekt.
    *
    * @param {FallingObject} object Padající objekt testovaný proti hráči.
-   * @returns {boolean} true při kolizi, jinak false.
+   * @returns {string|null} Typ kolize nebo null, pokud ke kolizi nedošlo.
    */
   collide(object) {
-    const hasCollided = collideRectCircle(
+    const collision = collideRectCircle(
       this.x,
       this.y,
       this.size,
@@ -82,21 +82,26 @@ class Player {
     );
 
     // Bez kolize není důvod měnit skóre ani odstraňovat objekt.
-    if (!hasCollided) {
-      return false;
+    if (!collision) {
+      return null;
     }
 
     // instanceof rozliší herní význam objektu, přestože všechny typy
-    // zpracováváme společně v poli objects.
+    // zpracováváme společně v poli objects. Název typu vracíme volajícímu,
+    // který podle něj zvolí zvukový efekt.
     if (object instanceof Snowflake) {
       this.score += 2;
+      return "snowflake";
     } else if (object instanceof Raindrop) {
       this.score += 1;
+      return "raindrop";
     } else if (object instanceof Soot) {
       this.score -= 3;
+      return "soot";
     }
 
-    return true;
+    // Tato větev chrání metodu před budoucím neznámým typem objektu.
+    return null;
   }
 
   /**
