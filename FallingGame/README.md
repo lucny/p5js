@@ -13,10 +13,12 @@ Projekt slouží jako praktická ukázka tvorby malé animované aplikace. Canva
 Ukázka procvičuje především:
 
 - třídy, konstruktory, vlastnosti a metody,
+- samostatnou třídu hráče a ovládání pomocí šipek,
 - dědičnost pomocí `extends` a `super()`,
 - polymorfismus a operátor `instanceof`,
 - práci s polem objektů,
 - automatické vytváření a odstraňování objektů,
+- detekci kolizí a změnu skóre,
 - načítání a vykreslování obrázků v p5.js.
 
 ## Struktura projektu
@@ -25,6 +27,7 @@ Ukázka procvičuje především:
 - `sketch.js` - hlavní program se životním cyklem p5.js a správou objektů.
 - `FallingObject.js` - společná rodičovská třída.
 - `Snowflake.js`, `Raindrop.js`, `Soot.js` - specializované potomkovské třídy.
+- `Player.js` - hráč s ovládáním, kolizemi a skóre.
 - `images/` - SVG obrázky používané ve scéně.
 - `navody/` - výukové lekce navazující na projekt.
 

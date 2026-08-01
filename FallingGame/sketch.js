@@ -5,6 +5,9 @@ let objects = [];
 // Slovník obrázků odděluje názvy assetů od konkrétních instancí p5.Image.
 let images = {};
 
+// Hráč je samostatný objekt, protože jeho pohyb řídí uživatel místo gravitace.
+let player;
+
 /**
  * Načte obrázky před spuštěním canvasu.
  *
@@ -16,6 +19,7 @@ function preload() {
   images["flake"] = loadImage("./images/snowflake.svg");
   images["drop"] = loadImage("./images/raindrop.svg");
   images["soot"] = loadImage("./images/soot.svg");
+  images["player"] = loadImage("./images/snowman.png");
 }
 
 /**
@@ -27,6 +31,14 @@ function setup() {
 
   // Souřadnice objektu budou označovat jeho střed.
   imageMode(CENTER);
+
+  // x je levý okraj hráče, proto od středu canvasu odečteme polovinu velikosti.
+  player = new Player(
+    width / 2 - 25,
+    height - 70,
+    50,
+    images["player"]
+  );
 }
 
 /**
@@ -41,12 +53,24 @@ function draw() {
     createObject();
   }
 
+  // Ovládání se zpracovává v každém snímku kvůli plynulému pohybu při držení klávesy.
+  updatePlayer();
+
   // Pole procházíme odzadu, protože během průchodu můžeme některé objekty odstranit.
   for (let i = objects.length - 1; i >= 0; i--) {
     const object = objects[i];
 
-    // Polymorfismus: každý typ objektu sám rozhodne, jak se aktualizuje a vykreslí.
+    // Nejprve aktualizujeme polohu, aby kolize odpovídala právě vznikajícímu snímku.
     object.update();
+
+    // Hráč může objekt sebrat nebo zasáhnout. Po kolizi se objekt odstraní
+    // a continue zabrání jeho dalšímu vykreslení v tomto průchodu.
+    if (player.collide(object)) {
+      objects.splice(i, 1);
+      continue;
+    }
+
+    // Polymorfismus: každý typ objektu sám rozhodne, jak se vykreslí.
     object.draw();
 
     // Objekt odstraníme až poté, co celý opustí canvas, aby nebylo pole zbytečně velké.
@@ -55,7 +79,27 @@ function draw() {
     }
   }
 
+  // Hráče kreslíme po padajících objektech, aby byl v popředí scény.
+  player.draw();
+
   drawStatistics();
+}
+
+/**
+ * Předá aktuální stav šipek hráči.
+ *
+ * keyIsDown() vrací true po celou dobu, kdy je klávesa stisknutá. To je
+ * vhodnější než keyPressed() pro spojitý pohyb, protože draw() může hráče
+ * posouvat v každém animačním snímku.
+ */
+function updatePlayer() {
+  if (keyIsDown(LEFT_ARROW)) {
+    player.update("left");
+  }
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    player.update("right");
+  }
 }
 
 /**
@@ -95,21 +139,7 @@ function drawStatistics() {
   noStroke();
   textSize(16);
 
-  // instanceof rozliší skutečnou třídu objektu, i když všechny leží v jednom poli.
-  const snowflakeCount = objects.filter(
-    object => object instanceof Snowflake
-  ).length;
-
-  const raindropCount = objects.filter(
-    object => object instanceof Raindrop
-  ).length;
-
-  const sootCount = objects.filter(
-    object => object instanceof Soot
-  ).length;
-
-  text("Celkem: " + objects.length, 20, 30);
-  text("Vločky: " + snowflakeCount, 20, 50);
-  text("Kapky: " + raindropCount, 20, 70);
-  text("Saze: " + sootCount, 20, 90);
+  // Skóre je uloženo uvnitř hráče, proto ho čteme přes player.score.
+  text("Počet objektů: " + objects.length, 20, 30);
+  text("Skóre: " + player.score, 20, 50);
 }

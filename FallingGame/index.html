@@ -4,7 +4,7 @@
     <!-- Základní metadata umožní správné zobrazení stránky i na mobilních zařízeních. -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Padajici objekty</title>
+    <title>FallingGame</title>
     <style>
       /* Odstraníme výchozí okraje prohlížeče a nastavíme barvu kolem canvasu. */
       html,
@@ -38,13 +38,21 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
 
     <!--
+      Externí knihovna poskytuje collideRectCircle(), kterou používá Player.
+      Musí být načtena po p5.js a před vlastními třídami a sketch.js.
+    -->
+    <script src="https://unpkg.com/p5.collide2d"></script>
+
+    <!--
       Pořadí tříd odpovídá dědičnosti. Nejprve se načte rodičovská třída,
-      potom její potomci a nakonec hlavní program, který všechny třídy vytváří.
+      potom její potomci, třída hráče a nakonec hlavní program, který všechny
+      třídy vytváří.
     -->
     <script src="FallingObject.js"></script>
     <script src="Snowflake.js"></script>
     <script src="Raindrop.js"></script>
     <script src="Soot.js"></script>
+    <script src="Player.js"></script>
     <script src="sketch.js"></script>
   </body>
 </html>
